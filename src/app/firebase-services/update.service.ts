@@ -42,6 +42,7 @@ export class UpdateService {
       street: obj.street || "",
       zipCode: obj.zipCode || "",
       city: obj.city || "",
+      email: obj.email || "",
     }
   }
 
@@ -57,6 +58,7 @@ export class UpdateService {
       street: user.street,
       zipCode: user.zipCode,
       city: user.city,
+      email: user.email,
     }
   }
 

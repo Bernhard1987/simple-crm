@@ -28,6 +28,14 @@
 
 <div class="mat-dialog-row">
     <mat-form-field appearance="outline" class="full-width">
+        <mat-label>E-Mail</mat-label>
+        <input [(ngModel)]="user.email" matInput placeholder="example@example.com">
+        <!-- <mat-hint>Please enter a name</mat-hint> -->
+    </mat-form-field>
+</div>
+
+<div class="mat-dialog-row">
+    <mat-form-field appearance="outline" class="full-width">
         <mat-label>Street + House No</mat-label>
         <input [(ngModel)]="user.street" matInput placeholder="Main Street 123">
         <!-- <mat-hint>Please enter a name</mat-hint> -->
