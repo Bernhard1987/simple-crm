@@ -8,11 +8,11 @@
                 <th>City</th>
             </tr>
             @for (user of this.updateService.userList; track $index) {
-            <tr>
+            <tr [routerLink]="['/user/' + user.id]" routerLinkActive="router-link-active" >
                 <td> {{user.firstName}} {{user.lastName}}</td>
                 <td> {{user.email}} </td>
                 <td> {{user.zipCode}} </td>
-                <td> {{user.city}} </td>
+                <td> {{user.city}}</td>
             </tr>
             }
         </table>

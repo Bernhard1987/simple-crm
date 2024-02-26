@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, onSnapshot, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, onSnapshot, collection, addDoc, doc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.class';
 
@@ -13,6 +13,7 @@ export class UpdateService {
   dialogOpen = false;
 
   userList: User[] = [];
+  currentUser: User = new User();
 
   unsubUserList;
 
@@ -46,8 +47,20 @@ export class UpdateService {
     }
   }
 
+  getSingleUserData(userId: string) {
+    return onSnapshot(this.getSingleDocRef('users', userId), (user: any) => {
+      this.currentUser = user.data();
+      this.currentUser.id = userId;
+      console.log(this.currentUser);
+    })
+  }
+
   getUsersRef() {
     return collection(this.firestore, 'users');
+  }
+
+  getSingleDocRef(colId: string, docId: string) {
+    return doc(collection(this.firestore, colId), docId);
   }
 
   getCleanJson(user: User): {} {

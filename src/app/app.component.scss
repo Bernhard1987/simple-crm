@@ -24,7 +24,6 @@
                 align-items: center;
                 cursor: pointer;
                 width: 100%;
-                gap: 16px;
 
                 &:hover {
                     background-color: rgba(0, 0, 0, 0.04);
@@ -45,7 +44,6 @@
 
         >.mat-toolbar-row {
             display: flex;
-            gap: 8px;
 
             >.menu-icon {
                 cursor: pointer;
