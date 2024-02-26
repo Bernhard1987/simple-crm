@@ -1,8 +1,28 @@
-<p>user works!</p>
+<mat-card>
+    <mat-card-content>
+        <table class="user-table">
+            <tr>
+                <th>Name</th>
+                <th>E-Mail</th>
+                <th>Zip Code</th>
+                <th>City</th>
+            </tr>
+            @for (user of this.updateService.userList; track $index) {
+            <tr>
+                <td> {{user.firstName}} {{user.lastName}}</td>
+                <td> {{user.birthDate}} </td>
+                <td> {{user.zipCode}} </td>
+                <td> {{user.city}} </td>
+            </tr>
+            }
+        </table>
+    </mat-card-content>
+</mat-card>
+
+
 <div class="btn-container">
     <button (click)="openDialog()" mat-fab color="primary" matTooltip="Add new user"
-    [matTooltipPosition]="position.value!"
-    matTooltipHideDelay="2000">
+        [matTooltipPosition]="position.value!" matTooltipHideDelay="2000">
         <mat-icon>person_add</mat-icon>
     </button>
 </div>
