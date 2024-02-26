@@ -1,0 +1,62 @@
+.mat-drawer-container {
+    height: 100vh;
+
+    >.sidenav {
+        width: 300px;
+
+        .logo-container {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            padding-left: 16px;
+            padding-right: 16px;
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+
+            >li {
+                padding: 16px;
+                height: 48px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                width: 100%;
+                gap: 16px;
+
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.04);
+                }
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+}
+
+.sidenav-content {
+    >.mat-toolbar-multiple-rows {
+        min-height: 56px;
+        height: 56px;
+
+        >.mat-toolbar-row {
+            display: flex;
+            gap: 8px;
+
+            >.menu-icon {
+                cursor: pointer;
+            }
+        }
+    }
+
+    >.router-container {
+        padding-left: 56px;
+        padding-top: 16px;
+    }
+}
