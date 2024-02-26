@@ -9,6 +9,12 @@ section {
     background-color: green;
     color: white;
 
+    button {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+    }
+
     mat-card-content {
         min-height: inherit;
         display: flex;
@@ -35,4 +41,13 @@ section {
         }
     }
 
+}
+
+.address {
+    button {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }

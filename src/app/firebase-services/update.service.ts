@@ -51,7 +51,6 @@ export class UpdateService {
     return onSnapshot(this.getSingleDocRef('users', userId), (user: any) => {
       this.currentUser = user.data();
       this.currentUser.id = userId;
-      console.log(this.currentUser);
     })
   }
 
@@ -81,7 +80,6 @@ export class UpdateService {
       (err) => { console.error(err) }
     ).then(
       (docRef) => {
-        console.log('Document written with ID: ', docRef);
         this.loading = !this.loading;
         this.dialogOpen = false;
       }
