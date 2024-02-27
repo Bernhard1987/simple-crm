@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UpdateService } from '../firebase-services/update.service';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
+import { User } from '../models/user.class';
 
 @Component({
   selector: 'app-user-detail',
@@ -35,12 +36,14 @@ export class UserDetailComponent {
   }
 
   editUserDetail() {
-    this.dialog.open(DialogEditUserComponent);
+    const dialog = this.dialog.open(DialogEditUserComponent);
     this.updateService.dialogOpen = true;
+    dialog.componentInstance.user = new User(this.updateService.currentUser);
   }
 
   editUserAddress() {
-    this.dialog.open(DialogEditAddressComponent);
+    const dialog = this.dialog.open(DialogEditAddressComponent);
     this.updateService.dialogOpen = true;
+    dialog.componentInstance.user = new User(this.updateService.currentUser);
   }
 }
