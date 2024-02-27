@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, onSnapshot, collection, addDoc, doc } from '@angular/fire/firestore';
+import { Firestore, onSnapshot, collection, addDoc, updateDoc, deleteDoc, doc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.class';
 
@@ -84,5 +84,15 @@ export class UpdateService {
         this.dialogOpen = false;
       }
     )
+  }
+
+  async updateUser(user: User, userId: string | null) {
+    this.loading = !this.loading;
+    if (userId) {
+      let docRef = this.getSingleDocRef('users', userId);
+      await updateDoc(docRef, this.getCleanJson(user)).catch(
+        (err) => { console.error(err) }
+      );
+    }
   }
 }

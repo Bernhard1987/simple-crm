@@ -36,6 +36,7 @@ import { UpdateService } from '../firebase-services/update.service';
 export class DialogEditAddressComponent {
   updateService = new UpdateService();
   user = new User();
+  userId: string | null = '';
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditAddressComponent>,
@@ -46,7 +47,7 @@ export class DialogEditAddressComponent {
   }
 
   save() {
-    this.updateService.saveUser(this.updateService.getCleanJson(this.user));
+    this.updateService.updateUser(this.user, this.userId);
     if (!this.updateService.dialogOpen) {
       this.dialogRef.close();
     }
