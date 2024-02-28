@@ -1,3 +1,4 @@
+@if (userIsLoggedIn) {
 <mat-drawer-container class="mat-drawer-container" autosize>
   <mat-drawer #drawer class="sidenav" mode="side" [opened]="true">
     <div class="logo-container">
@@ -6,12 +7,12 @@
 
     <ul class="menu-items">
       <li routerLink="/dashboard" class="gap-16">
-          <mat-icon>dashboard</mat-icon>
-          Dashboard
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
       </li>
       <li routerLink="/user" class="gap-16">
-          <mat-icon>person</mat-icon>
-          User
+        <mat-icon>person</mat-icon>
+        User
       </li>
     </ul>
   </mat-drawer>
@@ -28,3 +29,6 @@
     </div>
   </div>
 </mat-drawer-container>
+} @else {
+  <router-outlet></router-outlet>
+}
