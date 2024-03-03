@@ -30,9 +30,14 @@
                             type="password" name="passwordConfirm" placeholder="">
                         @if ((user.password != user.passwordConfirm) && passwordConfirm.touched) {
                         <mat-hint class="hint-error">The passwords entered do not match!</mat-hint>
-                        } @else if (user.password.length < 8 && password.touched && passwordConfirm.touched) {
-                            <mat-hint class="hint-error">Please choose a longer password<br>(minimum 8 chars)</mat-hint>
-                        }
+                        } @else if (user.password.length < 8 && password.touched && passwordConfirm.touched &&
+                            user.password.length > 0 && user.passwordConfirm.length > 0) {
+                            <mat-hint class="hint-error">Please choose a longer password</mat-hint>
+                            } @else if ((user.password == user.passwordConfirm) && passwordConfirm.touched && user.password.length >= 8) {
+                            <mat-hint class="hint-valid">Entered passwords are valid :)</mat-hint>
+                            } @else {
+                            <mat-hint>A minimum length of 8 is required</mat-hint>
+                            }
                     </mat-form-field>
                 </div>
                 <div class="login-buttons">
