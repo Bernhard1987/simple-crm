@@ -22,12 +22,14 @@ import { RouterLink } from '@angular/router';
     MatFormFieldModule,
     MatCardModule,
     MatCheckboxModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+
+  updateService = new UpdateService();
 
   user = {
     email: '',
@@ -35,8 +37,8 @@ export class RegisterComponent {
     passwordConfirm: ''
   }
 
-  onSubmit(ngForm: NgForm) {
-    console.log("user = ", this.user, ". ngForm = ", ngForm);
+  registerUser() {
+    this.updateService.createNewUser(this.user);
   }
 
 }

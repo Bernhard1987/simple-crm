@@ -5,36 +5,40 @@
                 <img src="./assets/img/crm-logo-sidebar.png" alt="">
                 <h2>Register new account</h2>
             </div>
-            <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm" class="login-inputs">
+            <form (ngSubmit)="registerUser()" #registerForm="ngForm" class="login-inputs">
                 <div class="mat-dialog-row">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>E-Mail</mat-label>
-                        <input #email="ngModel" [(ngModel)]="user.email" matInput type="email" name="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" placeholder="example@example.com">
+                        <input #email="ngModel" [(ngModel)]="user.email" matInput type="email" name="email"
+                            pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                            placeholder="example@example.com">
                         <!-- <mat-hint>Please enter a name</mat-hint> -->
                     </mat-form-field>
                 </div>
                 <div class="mat-dialog-row">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Password</mat-label>
-                        <input #password="ngModel" [(ngModel)]="user.password" matInput type="password" name="password" placeholder="">
+                        <input #password="ngModel" [(ngModel)]="user.password" matInput minlength="8" type="password"
+                            name="password" placeholder="">
                         <!-- <mat-hint>Please enter a name</mat-hint> -->
                     </mat-form-field>
                 </div>
                 <div class="mat-dialog-row">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Repeat Password</mat-label>
-                        <input #passwordConfirm="ngModel" [(ngModel)]="user.passwordConfirm" matInput type="password" name="passwordConfirm" placeholder="">
-                        <!-- <mat-hint>Please enter a name</mat-hint> -->
+                        <input #passwordConfirm="ngModel" [(ngModel)]="user.passwordConfirm" matInput minlength="8"
+                            type="password" name="passwordConfirm" placeholder="">
+                        @if ((user.password != user.passwordConfirm) && passwordConfirm.touched) {
+                        <mat-hint class="hint-error">The passwords entered do not match!</mat-hint>
+                        } @else if (user.password.length < 8 && password.touched && passwordConfirm.touched) {
+                            <mat-hint class="hint-error">Please choose a longer password<br>(minimum 8 chars)</mat-hint>
+                        }
                     </mat-form-field>
                 </div>
                 <div class="login-buttons">
-                    <button [disabled]="!user.email || !(user.password == user.passwordConfirm) || !password.touched" mat-raised-button color="primary">Register</button>
-
-                    <div class="errorbox">
-                        @if ((user.password != user.passwordConfirm) && passwordConfirm.touched) {
-                        <span>The passwords entered do not match!</span>
-                        }
-                    </div>
+                    <button
+                        [disabled]="!user.email || !(user.password == user.passwordConfirm) || !password.touched || !password.valid || !passwordConfirm.valid"
+                        mat-raised-button color="primary">Register</button>
                 </div>
             </form>
         </mat-card-content>
