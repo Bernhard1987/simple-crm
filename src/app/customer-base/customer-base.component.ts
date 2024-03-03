@@ -8,7 +8,7 @@ import { TooltipPosition, MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { User } from '../models/user.class';
-import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
+import { DialogAddCustomerComponent } from '../dialog-add-customer/dialog-add-customer.component';
 import { UpdateService } from '../firebase-services/update.service';
 
 @Component({
@@ -21,12 +21,12 @@ import { UpdateService } from '../firebase-services/update.service';
     MatIconModule,
     MatTooltipModule,
     MatCardModule,
-    DialogAddUserComponent,
+    DialogAddCustomerComponent,
   ],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.scss'
+  templateUrl: './customer-base.component.html',
+  styleUrl: './customer-base.component.scss'
 })
-export class UserComponent {
+export class CustomerBaseComponent {
   updateService = new UpdateService();
 
   positionOptions: TooltipPosition[] = ['left'];
@@ -37,7 +37,7 @@ export class UserComponent {
   constructor(public dialog: MatDialog) { }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddUserComponent);
+    const dialogRef = this.dialog.open(DialogAddCustomerComponent);
     this.updateService.dialogOpen = true;
   }
 }

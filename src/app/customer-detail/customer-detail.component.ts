@@ -11,13 +11,13 @@ import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-a
 import { User } from '../models/user.class';
 
 @Component({
-  selector: 'app-user-detail',
+  selector: 'app-customer-detail',
   standalone: true,
   imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule],
-  templateUrl: './user-detail.component.html',
-  styleUrl: './user-detail.component.scss'
+  templateUrl: './customer-detail.component.html',
+  styleUrl: './customer-detail.component.scss'
 })
-export class UserDetailComponent {
+export class CustomerDetailComponent {
   unsubSingle: any;
 
   userId: string | null = '';

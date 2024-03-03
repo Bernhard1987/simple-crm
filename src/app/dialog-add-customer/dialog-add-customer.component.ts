@@ -32,17 +32,17 @@ import { UpdateService } from '../firebase-services/update.service';
     MatDatepickerModule,
     MatProgressBarModule,
   ],
-  templateUrl: './dialog-add-user.component.html',
-  styleUrl: './dialog-add-user.component.scss'
+  templateUrl: './dialog-add-customer.component.html',
+  styleUrl: './dialog-add-customer.component.scss'
 })
-export class DialogAddUserComponent {
+export class DialogAddCustomerComponent {
   updateService = new UpdateService;
 
   user = new User();
   birthDate: Date = new Date();
 
   constructor(
-    public dialogRef: MatDialogRef<DialogAddUserComponent>,
+    public dialogRef: MatDialogRef<DialogAddCustomerComponent>,
   ) { }
 
   onNoClick(): void {
