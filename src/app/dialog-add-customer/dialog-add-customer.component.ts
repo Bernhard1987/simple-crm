@@ -13,11 +13,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { User } from '../models/user.class';
+import { Customer } from '../models/customer.class';
 import { UpdateService } from '../firebase-services/update.service';
 
 @Component({
-  selector: 'app-dialog-add-user',
+  selector: 'app-dialog-add-customer',
   standalone: true,
   providers: [provideNativeDateAdapter()],
   imports: [
@@ -38,7 +38,7 @@ import { UpdateService } from '../firebase-services/update.service';
 export class DialogAddCustomerComponent {
   updateService = new UpdateService;
 
-  user = new User();
+  customer = new Customer();
   birthDate: Date = new Date();
 
   constructor(
@@ -50,8 +50,8 @@ export class DialogAddCustomerComponent {
   }
 
   save() {
-    this.user.birthDate = this.birthDate.getTime(); //converts date object to timestamp
-    this.updateService.saveUser(this.updateService.getCleanJson(this.user));
+    this.customer.birthDate = this.birthDate.getTime(); //converts date object to timestamp
+    this.updateService.saveCustomer(this.updateService.getCleanJson(this.customer));
     if (!this.updateService.dialogOpen) {
       this.dialogRef.close();
     }

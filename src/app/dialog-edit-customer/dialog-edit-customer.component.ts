@@ -13,11 +13,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { User } from '../models/user.class';
+import { Customer } from '../models/customer.class';
 import { UpdateService } from '../firebase-services/update.service';
 
 @Component({
-  selector: 'app-dialog-edit-user',
+  selector: 'app-dialog-edit-customer',
   standalone: true,
   providers: [provideNativeDateAdapter()],
   imports: [
@@ -32,16 +32,16 @@ import { UpdateService } from '../firebase-services/update.service';
     MatDatepickerModule,
     MatProgressBarModule,
   ],
-  templateUrl: './dialog-edit-user.component.html',
-  styleUrl: './dialog-edit-user.component.scss'
+  templateUrl: './dialog-edit-customer.component.html',
+  styleUrl: './dialog-edit-customer.component.scss'
 })
-export class DialogEditUserComponent {
+export class DialogEditCustomerComponent {
   updateService = new UpdateService();
-  user = new User();
-  userId: string | null = '';
+  customer = new Customer();
+  customerId: string | null = '';
 
   constructor(
-    public dialogRef: MatDialogRef<DialogEditUserComponent>,
+    public dialogRef: MatDialogRef<DialogEditCustomerComponent>,
   ) { }
 
   onNoClick(): void {
@@ -49,7 +49,7 @@ export class DialogEditUserComponent {
   }
 
   save() {
-    this.updateService.updateUser(this.user, this.userId);
+    this.updateService.updateCustomer(this.customer, this.customerId);
     if (!this.updateService.dialogOpen) {
       this.dialogRef.close();
     }

@@ -6,12 +6,12 @@
 <div class="mat-dialog-row">
     <mat-form-field appearance="outline">
         <mat-label>First Name</mat-label>
-        <input [(ngModel)]="user.firstName" matInput placeholder="John">
+        <input [(ngModel)]="customer.firstName" matInput placeholder="John">
         <!-- <mat-hint>Please enter a name</mat-hint> -->
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-label>Last Name</mat-label>
-        <input [(ngModel)]="user.lastName" matInput placeholder="Doe">
+        <input [(ngModel)]="customer.lastName" matInput placeholder="Doe">
         <!-- <mat-hint>Please enter a name</mat-hint> -->
     </mat-form-field>
 </div>
@@ -19,7 +19,7 @@
 <div class="mat-dialog-row">
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Birthdate</mat-label>
-        <input [(ngModel)]="user.birthDate" matInput [matDatepicker]="picker">
+        <input [(ngModel)]="customer.birthDate" matInput [matDatepicker]="picker">
         <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
@@ -29,7 +29,7 @@
 <div class="mat-dialog-row">
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>E-Mail</mat-label>
-        <input [(ngModel)]="user.email" matInput placeholder="example@example.com">
+        <input [(ngModel)]="customer.email" matInput placeholder="example@example.com">
         <!-- <mat-hint>Please enter a name</mat-hint> -->
     </mat-form-field>
 </div>
@@ -37,7 +37,7 @@
 <div class="mat-dialog-row">
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Street + House No</mat-label>
-        <input [(ngModel)]="user.street" matInput placeholder="Main Street 123">
+        <input [(ngModel)]="customer.street" matInput placeholder="Main Street 123">
         <!-- <mat-hint>Please enter a name</mat-hint> -->
     </mat-form-field>
 </div>
@@ -45,7 +45,7 @@
 <div class="mat-dialog-row">
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Zip code</mat-label>
-        <input [(ngModel)]="user.zipCode" matInput placeholder="12312">
+        <input [(ngModel)]="customer.zipCode" matInput placeholder="12312">
         <!-- <mat-hint>Please enter a name</mat-hint> -->
     </mat-form-field>
 </div>
@@ -53,7 +53,7 @@
 <div class="mat-dialog-row">
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>City</mat-label>
-        <input [(ngModel)]="user.city" matInput placeholder="Sampletown">
+        <input [(ngModel)]="customer.city" matInput placeholder="Sampletown">
         <!-- <mat-hint>Please enter a name</mat-hint> -->
     </mat-form-field>
 </div>

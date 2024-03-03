@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { User } from '../models/user.class';
+import { Customer } from '../models/customer.class';
 import { UpdateService } from '../firebase-services/update.service';
 
 @Component({
@@ -35,8 +35,8 @@ import { UpdateService } from '../firebase-services/update.service';
 })
 export class DialogEditAddressComponent {
   updateService = new UpdateService();
-  user = new User();
-  userId: string | null = '';
+  customer = new Customer();
+  customerId: string | null = '';
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditAddressComponent>,
@@ -47,7 +47,7 @@ export class DialogEditAddressComponent {
   }
 
   save() {
-    this.updateService.updateUser(this.user, this.userId);
+    this.updateService.updateCustomer(this.customer, this.customerId);
     if (!this.updateService.dialogOpen) {
       this.dialogRef.close();
     }

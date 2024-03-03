@@ -7,12 +7,12 @@ import { FormControl } from '@angular/forms';
 import { TooltipPosition, MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { User } from '../models/user.class';
+import { Customer } from '../models/customer.class';
 import { DialogAddCustomerComponent } from '../dialog-add-customer/dialog-add-customer.component';
 import { UpdateService } from '../firebase-services/update.service';
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-customer-base',
   standalone: true,
   imports: [
     RouterLink,
@@ -32,7 +32,7 @@ export class CustomerBaseComponent {
   positionOptions: TooltipPosition[] = ['left'];
   position = new FormControl(this.positionOptions[0]);
 
-  user = new User();
+  user = new Customer();
 
   constructor(public dialog: MatDialog) { }
 

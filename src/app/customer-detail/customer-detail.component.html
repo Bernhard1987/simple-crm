@@ -4,18 +4,18 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #detailmenu="matMenu" yPosition="below" xPosition="before">
-            <button mat-menu-item (click)="editUserDetail()">Edit</button>
+            <button mat-menu-item (click)="editCustomerDetail()">Edit</button>
         </mat-menu>
         <mat-card-content>
             <img src="./assets/img/avatar.png" alt="">
             <div class="user-detail-header-details">
                 <h2>
-                    {{ this.updateService.currentUser.firstName }}
-                    {{ this.updateService.currentUser.lastName }}
+                    {{ this.updateService.currentCustomer.firstName }}
+                    {{ this.updateService.currentCustomer.lastName }}
                 </h2>
                 <span>
                     <mat-icon>contact_mail</mat-icon>
-                    {{ this.updateService.currentUser.email }}
+                    {{ this.updateService.currentCustomer.email }}
                 </span>
             </div>
         </mat-card-content>
@@ -26,7 +26,7 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #addressmenu="matMenu" yPosition="below" xPosition="before">
-            <button mat-menu-item (click)="editUserAddress()">Edit</button>
+            <button mat-menu-item (click)="editCustomerAddress()">Edit</button>
         </mat-menu>
 
         <mat-card-header>
@@ -34,8 +34,8 @@
         </mat-card-header>
 
         <mat-card-content>
-            {{ this.updateService.currentUser.street }} <br>
-            {{ this.updateService.currentUser.zipCode }} {{ this.updateService.currentUser.city }}
+            {{ this.updateService.currentCustomer.street }} <br>
+            {{ this.updateService.currentCustomer.zipCode }} {{ this.updateService.currentCustomer.city }}
         </mat-card-content>
     </mat-card>
 </section>

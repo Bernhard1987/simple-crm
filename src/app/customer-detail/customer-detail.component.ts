@@ -6,9 +6,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { UpdateService } from '../firebase-services/update.service';
-import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
+import { DialogEditCustomerComponent } from '../dialog-edit-customer/dialog-edit-customer.component';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
-import { User } from '../models/user.class';
+import { Customer } from '../models/customer.class';
 
 @Component({
   selector: 'app-customer-detail',
@@ -20,7 +20,7 @@ import { User } from '../models/user.class';
 export class CustomerDetailComponent {
   unsubSingle: any;
 
-  userId: string | null = '';
+  customerId: string | null = '';
 
   updateService = new UpdateService;
 
@@ -28,24 +28,24 @@ export class CustomerDetailComponent {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
-      this.userId = paramMap.get('id');
-      if (this.userId != null) {
-        this.updateService.getSingleUserData(this.userId);
+      this.customerId = paramMap.get('id');
+      if (this.customerId != null) {
+        this.updateService.getSingleCustomerData(this.customerId);
       }
     })
   }
 
-  editUserDetail() {
-    const dialog = this.dialog.open(DialogEditUserComponent);
+  editCustomerDetail() {
+    const dialog = this.dialog.open(DialogEditCustomerComponent);
     this.updateService.dialogOpen = true;
-    dialog.componentInstance.user = new User(this.updateService.currentUser);
-    dialog.componentInstance.userId = this.userId;
+    dialog.componentInstance.customer = new Customer(this.updateService.currentCustomer);
+    dialog.componentInstance.customerId = this.customerId;
   }
 
-  editUserAddress() {
+  editCustomerAddress() {
     const dialog = this.dialog.open(DialogEditAddressComponent);
     this.updateService.dialogOpen = true;
-    dialog.componentInstance.user = new User(this.updateService.currentUser);
-    dialog.componentInstance.userId = this.userId;
+    dialog.componentInstance.customer = new Customer(this.updateService.currentCustomer);
+    dialog.componentInstance.customerId = this.customerId;
   }
 }
