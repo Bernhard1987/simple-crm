@@ -2,6 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Firestore, onSnapshot, collection, addDoc, updateDoc, deleteDoc, doc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Customer } from '../models/customer.class';
+import { newUser } from '../models/new-user.class';
+import { GoogleAuthProvider, getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,9 @@ import { Customer } from '../models/customer.class';
 export class UpdateService {
 
   firestore: Firestore = inject(Firestore);
+  provider = new GoogleAuthProvider();
+  auth = getAuth();
+
   loading = false;
   dialogOpen = false;
 
@@ -24,6 +29,11 @@ export class UpdateService {
   ngOnDestroy() {
     this.unsubCustomerList();
   }
+
+  /**
+   * All Customer related functions are set here
+   * @returns 
+   */
 
   subCustomerList() {
     return onSnapshot(this.getCustomersRef(), (list) => {
@@ -62,7 +72,7 @@ export class UpdateService {
     return doc(collection(this.firestore, colId), docId);
   }
 
-  getCleanJson(customer: Customer): {} {
+  getCleanCustomerJson(customer: Customer): {} {
     return {
       firstName: customer.firstName,
       lastName: customer.lastName,
@@ -90,9 +100,29 @@ export class UpdateService {
     this.loading = !this.loading;
     if (customerId) {
       let docRef = this.getSingleDocRef('customers', customerId);
-      await updateDoc(docRef, this.getCleanJson(customer)).catch(
+      await updateDoc(docRef, this.getCleanCustomerJson(customer)).catch(
         (err) => { console.error(err) }
       );
     }
   }
+
+  /**
+   * Firebase Auth related functions
+   */
+
+  createNewUser(user: newUser) {
+    createUserWithEmailAndPassword(this.auth, user.email, user.password)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  }
+
 }

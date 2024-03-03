@@ -51,7 +51,7 @@ export class DialogAddCustomerComponent {
 
   save() {
     this.customer.birthDate = this.birthDate.getTime(); //converts date object to timestamp
-    this.updateService.saveCustomer(this.updateService.getCleanJson(this.customer));
+    this.updateService.saveCustomer(this.updateService.getCleanCustomerJson(this.customer));
     if (!this.updateService.dialogOpen) {
       this.dialogRef.close();
     }

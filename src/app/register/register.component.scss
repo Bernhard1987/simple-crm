@@ -40,4 +40,11 @@ section {
             }
         }
     }
+    .errorbox {
+        // height: 17px;
+        span {
+            font-weight: 700;
+            color: red;
+        }
+    }
 }

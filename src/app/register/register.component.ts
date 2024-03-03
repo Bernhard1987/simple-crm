@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Customer } from '../models/customer.class';
+import { newUser } from '../models/new-user.class';
 import { UpdateService } from '../firebase-services/update.service';
 import { RouterLink } from '@angular/router';
 
@@ -13,6 +15,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-register',
   standalone: true,
   imports: [
+    NgClass,
     MatButtonModule,
     FormsModule,
     MatInputModule,
@@ -25,5 +28,15 @@ import { RouterLink } from '@angular/router';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+
+  user = {
+    email: '',
+    password: '',
+    passwordConfirm: ''
+  }
+
+  onSubmit(ngForm: NgForm) {
+    console.log("user = ", this.user, ". ngForm = ", ngForm);
+  }
 
 }

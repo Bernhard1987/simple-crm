@@ -5,25 +5,38 @@
                 <img src="./assets/img/crm-logo-sidebar.png" alt="">
                 <h2>Register new account</h2>
             </div>
-            <div class="login-inputs">
+            <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm" class="login-inputs">
                 <div class="mat-dialog-row">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>E-Mail</mat-label>
-                        <input matInput placeholder="example@example.com">
+                        <input #email="ngModel" [(ngModel)]="user.email" matInput type="email" name="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" placeholder="example@example.com">
                         <!-- <mat-hint>Please enter a name</mat-hint> -->
                     </mat-form-field>
                 </div>
                 <div class="mat-dialog-row">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Password</mat-label>
-                        <input matInput type="password" placeholder="">
+                        <input #password="ngModel" [(ngModel)]="user.password" matInput type="password" name="password" placeholder="">
+                        <!-- <mat-hint>Please enter a name</mat-hint> -->
+                    </mat-form-field>
+                </div>
+                <div class="mat-dialog-row">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Repeat Password</mat-label>
+                        <input #passwordConfirm="ngModel" [(ngModel)]="user.passwordConfirm" matInput type="password" name="passwordConfirm" placeholder="">
                         <!-- <mat-hint>Please enter a name</mat-hint> -->
                     </mat-form-field>
                 </div>
                 <div class="login-buttons">
-                    <button mat-raised-button color="primary">Register</button>
+                    <button [disabled]="!user.email || !(user.password == user.passwordConfirm) || !password.touched" mat-raised-button color="primary">Register</button>
+
+                    <div class="errorbox">
+                        @if ((user.password != user.passwordConfirm) && passwordConfirm.touched) {
+                        <span>The passwords entered do not match!</span>
+                        }
+                    </div>
                 </div>
-            </div>
+            </form>
         </mat-card-content>
     </mat-card>
 </section>
