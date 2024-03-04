@@ -1,0 +1,13 @@
+<button mat-icon-button [matMenuTriggerFor]="navsettings">
+    <mat-icon>settings</mat-icon>
+</button>
+<mat-menu #navsettings="matMenu" yPosition="below" xPosition="after">
+    <button routerLink="/user" mat-menu-item>
+        <mat-icon>person</mat-icon>
+        Profile
+    </button>
+    <button (click)="logoutUser()" mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        Log out
+    </button>
+</mat-menu>

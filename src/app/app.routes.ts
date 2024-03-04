@@ -3,6 +3,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerBaseComponent } from './customer-base/customer-base.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { RegisterComponent } from './register/register.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 export const routes: Routes = [
     { path: '', component: DashboardComponent },
@@ -10,4 +11,5 @@ export const routes: Routes = [
     { path: 'customers', component: CustomerBaseComponent },
     { path: 'customers/:id', component: CustomerDetailComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'user', component: UserDetailsComponent },
 ];

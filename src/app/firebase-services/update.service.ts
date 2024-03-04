@@ -3,7 +3,7 @@ import { Firestore, onSnapshot, collection, addDoc, updateDoc, deleteDoc, doc } 
 import { Observable } from 'rxjs';
 import { Customer } from '../models/customer.class';
 import { newUser } from '../models/new-user.class';
-import { GoogleAuthProvider, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Router, RouterLink } from '@angular/router';
 
 @Injectable({
@@ -153,6 +153,15 @@ export class UpdateService {
     localStorage.setItem('user', JSON.stringify(retUser));
     this.loginError = false;
     this.router.navigate(['/dashboard']);
+  }
+
+  logoutUser() {
+    signOut(this.auth).then(() => {
+      localStorage.removeItem('user');
+      this.router.navigate(['/']);
+    }).catch((error) => {
+      // An error happened.
+    });
   }
 
 }

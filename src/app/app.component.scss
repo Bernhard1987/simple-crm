@@ -44,8 +44,14 @@
 
         >.mat-toolbar-row {
             display: flex;
+            justify-content: space-between;
+            >.nav-side {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
 
-            >.menu-icon {
+            .menu-icon {
                 cursor: pointer;
             }
         }

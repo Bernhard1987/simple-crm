@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { UpdateService } from './firebase-services/update.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerBaseComponent } from './customer-base/customer-base.component';
+import { NavSettingsComponent } from './nav-settings/nav-settings.component';
 import { LoginComponent } from './login/login.component';
 
 import { MatIconModule } from '@angular/material/icon';
@@ -21,6 +22,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     DashboardComponent,
     CustomerBaseComponent,
     LoginComponent,
+    NavSettingsComponent,
     MatIconModule,
     MatToolbarModule,
     MatButtonModule,
