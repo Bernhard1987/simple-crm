@@ -36,11 +36,11 @@
                             } @else if ((user.password == user.passwordConfirm) && passwordConfirm.touched && user.password.length >= 8) {
                             <mat-hint class="hint-valid">Entered passwords are valid :)</mat-hint>
                             } @else {
-                            <mat-hint>A minimum length of 8 is required</mat-hint>
+                            <mat-hint>Hint: A minimum length of 8 is required</mat-hint>
                             }
                     </mat-form-field>
                 </div>
-                <div class="login-buttons">
+                <div class="register-button">
                     <button
                         [disabled]="!user.email || !(user.password == user.passwordConfirm) || !password.touched || !password.valid || !passwordConfirm.valid"
                         mat-raised-button color="primary">Register</button>

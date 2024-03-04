@@ -1,31 +1,38 @@
+<!-- @if(this.updateService.auth.currentUser.uid) -->
+
 <section class="login">
     <mat-card>
         <mat-card-content class="login-container">
             <div class="login-logo">
                 <img src="./assets/img/crm-logo-sidebar.png" alt="">
             </div>
-            <div class="login-inputs">
+            <form (ngSubmit)="loginUser()" #registerForm="ngForm" class="login-inputs">
                 <div class="mat-dialog-row">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>E-Mail</mat-label>
-                        <input matInput placeholder="example@example.com">
+                        <input #email="ngModel" [(ngModel)]="user.email" matInput name="email" placeholder="example@example.com">
                         <!-- <mat-hint>Please enter a name</mat-hint> -->
                     </mat-form-field>
                 </div>
                 <div class="mat-dialog-row">
                     <mat-form-field appearance="outline" class="full-width">
                         <mat-label>Password</mat-label>
-                        <input matInput type="password" placeholder="">
-                        <!-- <mat-hint>Please enter a name</mat-hint> -->
+                        <input #password="ngModel" [(ngModel)]="user.password" matInput type="password" name="password" placeholder="">
+                        @if (this.updateService.loginError) {
+                            <mat-hint>An error occured trying to log in</mat-hint>
+                        }
+                        
                     </mat-form-field>
                 </div>
                 <mat-checkbox class="login-remember-me">Remember me</mat-checkbox>
                 <div class="login-buttons">
                     <button mat-raised-button color="primary">Log in</button>
-                    <button mat-raised-button>Log in with <img src="./assets/img/google-g-logo.svg" alt=""></button>
-                    <button mat-button routerLink="/register" color="accent">Register new account</button>
-                    <button mat-button color="accent">I forgot my password</button>
                 </div>
+            </form>
+            <div class="login-buttons">
+                <button mat-raised-button>Log in with <img src="./assets/img/google-g-logo.svg" alt=""></button>
+                <button mat-button routerLink="/register" color="accent">Register new account</button>
+                <button mat-button color="accent">I forgot my password</button>
             </div>
         </mat-card-content>
     </mat-card>

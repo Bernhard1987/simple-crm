@@ -26,4 +26,15 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginComponent {
 
+  updateService = new UpdateService;
+
+  user = {
+    email: '',
+    password: ''
+  }
+
+  loginUser() {
+    this.updateService.loginUser(this.user);
+  }
+
 }

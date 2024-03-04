@@ -3,7 +3,8 @@ import { Firestore, onSnapshot, collection, addDoc, updateDoc, deleteDoc, doc } 
 import { Observable } from 'rxjs';
 import { Customer } from '../models/customer.class';
 import { newUser } from '../models/new-user.class';
-import { GoogleAuthProvider, getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { Router, RouterLink } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +14,24 @@ export class UpdateService {
   firestore: Firestore = inject(Firestore);
   provider = new GoogleAuthProvider();
   auth = getAuth();
+  router = new Router();
 
   loading = false;
   dialogOpen = false;
+  loginError = false;
 
   customerList: Customer[] = [];
   currentCustomer: Customer = new Customer();
+
+  localUser: any;
 
   unsubCustomerList;
 
   constructor() {
     this.unsubCustomerList = this.subCustomerList();
+    const userString = localStorage.getItem('user');
+    this.localUser = userString ? JSON.parse(userString) : '';
+    console.log('localuser constructor: ', this.localUser);
   }
 
   ngOnDestroy() {
@@ -114,15 +122,37 @@ export class UpdateService {
     createUserWithEmailAndPassword(this.auth, user.email, user.password)
       .then((userCredential) => {
         // Signed up 
-        const user = userCredential.user;
-        console.log(user);
+        this.actionsAfterSuccessfulLogin(userCredential);
+        // ...
+      })
+      .catch((error) => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // ..
+        this.loginError = true;
+      });
+  }
+
+  loginUser(user: newUser) {
+    signInWithEmailAndPassword(this.auth, user.email, user.password)
+      .then((userCredential) => {
+        // Signed in 
+        this.actionsAfterSuccessfulLogin(userCredential);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
+        this.loginError = true;
+        console.log(error);
       });
+  }
+
+  actionsAfterSuccessfulLogin(userCredential: any) {
+    const retUser = userCredential.user;
+    localStorage.setItem('user', JSON.stringify(retUser));
+    this.loginError = false;
+    this.router.navigate(['/dashboard']);
   }
 
 }

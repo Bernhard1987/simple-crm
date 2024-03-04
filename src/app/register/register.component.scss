@@ -25,10 +25,11 @@ section {
         }
     }
 
-    .login-buttons {
+    .register-button {
         display: flex;
         flex-direction: column;
         gap: 16px;
+        margin-top: 8px;
 
         >button {
             width: 100%;
