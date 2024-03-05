@@ -1,0 +1,53 @@
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.user-detail-header {
+    min-height: 300px;
+    background-color: green;
+    color: white;
+
+    button {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+    }
+
+    mat-card-content {
+        min-height: inherit;
+        display: flex;
+        gap: 16px;
+        justify-content: flex-start;
+        align-items: flex-end;
+
+        >.user-detail-header-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100px;
+            >span {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+        }
+
+        >img {
+            width: 100px;
+            object-fit: cover;
+            border-radius: 100%;
+        }
+    }
+
+}
+
+.address {
+    button {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}

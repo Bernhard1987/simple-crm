@@ -5,7 +5,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Customer } from '../models/customer.class';
 import { UpdateService } from '../firebase-services/update.service';
 import { RouterLink } from '@angular/router';
 

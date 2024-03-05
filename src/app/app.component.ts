@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerBaseComponent } from './customer-base/customer-base.component';
 import { NavSettingsComponent } from './nav-settings/nav-settings.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,6 +23,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     DashboardComponent,
     CustomerBaseComponent,
     LoginComponent,
+    RegisterComponent,
     NavSettingsComponent,
     MatIconModule,
     MatToolbarModule,

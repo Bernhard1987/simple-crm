@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, onSnapshot, collection, addDoc, updateDoc, deleteDoc, doc } from '@angular/fire/firestore';
+import { Firestore, onSnapshot, collection, addDoc, setDoc, updateDoc, deleteDoc, doc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Customer } from '../models/customer.class';
-import { newUser } from '../models/new-user.class';
+import { NewUser } from '../models/new-user.class';
+import { UserData } from '../models/userdata.class';
 import { GoogleAuthProvider, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Router, RouterLink } from '@angular/router';
 
@@ -14,6 +15,8 @@ export class UpdateService {
   firestore: Firestore = inject(Firestore);
   provider = new GoogleAuthProvider();
   auth = getAuth();
+  currentUserUid = this.auth.currentUser?.uid;
+  currentUserData = new UserData();
   router = new Router();
 
   loading = false;
@@ -23,15 +26,15 @@ export class UpdateService {
   customerList: Customer[] = [];
   currentCustomer: Customer = new Customer();
 
-  localUser: any;
+  userString = localStorage.getItem('user');
+  localUser: any = this.userString ? JSON.parse(this.userString) : '';
 
   unsubCustomerList;
 
   constructor() {
     this.unsubCustomerList = this.subCustomerList();
-    const userString = localStorage.getItem('user');
-    this.localUser = userString ? JSON.parse(userString) : '';
-    console.log('localuser constructor: ', this.localUser);
+    // console.log('localuser constructor: ', this.localUser);
+    console.log('auth constructor: ', this.auth);
   }
 
   ngOnDestroy() {
@@ -65,6 +68,13 @@ export class UpdateService {
     }
   }
 
+  setUserDataObject() {
+    return {
+      firstName: "",
+      lastName: ""
+    }
+  }
+
   getSingleCustomerData(customerId: string) {
     return onSnapshot(this.getSingleDocRef('customers', customerId), (customer: any) => {
       this.currentCustomer = customer.data();
@@ -72,8 +82,23 @@ export class UpdateService {
     })
   }
 
+  getCurrentUserData() {
+    if (this.currentUserUid) {
+      return onSnapshot(this.getSingleDocRef('userdata', this.currentUserUid), (userData: any) => {
+        this.currentUserData = userData.data();
+      })
+    } else {
+      console.error('error getting currentUserData');
+      return this.setUserDataObject();
+    }
+  }
+
   getCustomersRef() {
     return collection(this.firestore, 'customers');
+  }
+
+  getUserDataRef() {
+    return collection(this.firestore, 'userdata');
   }
 
   getSingleDocRef(colId: string, docId: string) {
@@ -118,22 +143,35 @@ export class UpdateService {
    * Firebase Auth related functions
    */
 
-  createNewUser(user: newUser) {
+  createNewUser(user: NewUser) {
     createUserWithEmailAndPassword(this.auth, user.email, user.password)
       .then((userCredential) => {
         // Signed up 
         this.actionsAfterSuccessfulLogin(userCredential);
+        this.createUserData(userCredential);
         // ...
       })
       .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
         // ..
         this.loginError = true;
       });
   }
 
-  loginUser(user: newUser) {
+  async createUserData(userCredential: any) {
+    const retUser = userCredential.user;
+    console.log('Hello, its me, createUserData trying to create new UserData for ', retUser.uid);
+    await setDoc(doc(this.firestore, 'userdata', retUser.uid), this.setUserDataObject()).catch(
+      (err) => { console.error(err) }
+    ).then(
+      (docRef) => {
+        console.log('userData set successful');
+      }
+    )
+  }
+
+  loginUser(user: NewUser) {
     signInWithEmailAndPassword(this.auth, user.email, user.password)
       .then((userCredential) => {
         // Signed in 
