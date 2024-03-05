@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DialogEditUserDataComponent } from '../dialog-edit-user-data/dialog-edit-user-data.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,7 +31,7 @@ export class UserDetailsComponent {
   }
 
   editUserDetail() {
-    console.log('editUserDetail clicked');
+      const dialog = this.dialog.open(DialogEditUserDataComponent);
+      this.updateService.dialogOpen = true;
   }
-
 }

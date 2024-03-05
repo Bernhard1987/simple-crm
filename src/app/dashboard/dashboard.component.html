@@ -1,1 +1,11 @@
-<p>dashboard works!</p>
+<section>
+    <h1>Welcome back<br>
+        @if (this.updateService.currentUserData.firstName != '' ||
+        this.updateService.currentUserData.lastName != '') {
+            {{ this.updateService.currentUserData.firstName }}
+            {{ this.updateService.currentUserData.lastName }}
+        } @else {
+            <i>{{ this.updateService.currentUserEMail }}</i>
+        }
+    </h1>
+</section>

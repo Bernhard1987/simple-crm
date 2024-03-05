@@ -17,6 +17,7 @@ export class UpdateService {
   auth = getAuth();
   currentUserUid = this.auth.currentUser?.uid;
   currentUserData = new UserData();
+  currentUserEMail = this.auth.currentUser?.email;
   router = new Router();
 
   loading = false;

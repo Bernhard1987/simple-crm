@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UpdateService } from '../firebase-services/update.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+  updateService = new UpdateService();
+
+  ngOnInit(): void {
+        this.updateService.getCurrentUserData();
+  }
 
 }
