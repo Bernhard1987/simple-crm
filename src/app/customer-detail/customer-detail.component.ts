@@ -6,6 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { UpdateService } from '../firebase-services/update.service';
+import { CustomerDetailNotesComponent } from '../customer-detail-notes/customer-detail-notes.component';
 import { DialogEditCustomerComponent } from '../dialog-edit-customer/dialog-edit-customer.component';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 import { Customer } from '../models/customer.class';
@@ -13,7 +14,13 @@ import { Customer } from '../models/customer.class';
 @Component({
   selector: 'app-customer-detail',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [
+    MatCardModule, 
+    MatIconModule, 
+    MatButtonModule, 
+    MatMenuModule,
+    CustomerDetailNotesComponent,
+  ],
   templateUrl: './customer-detail.component.html',
   styleUrl: './customer-detail.component.scss'
 })
@@ -29,8 +36,9 @@ export class CustomerDetailComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
       this.customerId = paramMap.get('id');
-      if (this.customerId != null) {
+      if (this.customerId) {
         this.updateService.getSingleCustomerData(this.customerId);
+        this.updateService.getCurrentCustomerNotes(this.customerId);
       }
     })
   }

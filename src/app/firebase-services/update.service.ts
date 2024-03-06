@@ -26,6 +26,7 @@ export class UpdateService {
 
   customerList: Customer[] = [];
   currentCustomer: Customer = new Customer();
+  currentCustomerNotesCollection = [];
 
   userString = localStorage.getItem('user');
   localUser: any = this.userString ? JSON.parse(this.userString) : '';
@@ -69,6 +70,15 @@ export class UpdateService {
     }
   }
 
+  // setNoteObject(obj: any) {
+  //   return {
+  //     title: title || "",
+  //     content: content || "",
+  //     createdByUid: createdByUid || "",
+  //     creationTime: creationTime || 0
+  //   }
+  // }
+
   setUserDataObject() {
     return {
       firstName: "",
@@ -80,6 +90,17 @@ export class UpdateService {
     return onSnapshot(this.getSingleDocRef('customers', customerId), (customer: any) => {
       this.currentCustomer = customer.data();
       this.currentCustomer.id = customerId;
+    })
+  }
+
+  getCurrentCustomerNotes(currentCustomerId: string) {
+    let ref = collection(this.firestore, "customers/" + currentCustomerId + "/notices");
+    return onSnapshot(ref, (noteList) => {
+      console.log(noteList);
+      this.currentCustomerNotesCollection = [];
+      // noteList.forEach(note: any => {
+      //         this.currentCustomerNotesCollection.push(note.data());
+      // })
     })
   }
 

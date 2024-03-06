@@ -1,0 +1,17 @@
+.single-note {
+    // background-color: #fafafa;
+    background-image: linear-gradient(180deg, #fafafa 0%, #f4f4f4 100%);
+    // background-image: linear-gradient(0deg, #cffaff 0%, #e0fffc 100%);
+
+    >.note-header {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        >.note-header-icon {
+            height: 18px;
+            width: 18px;
+            font-size: 18px;
+        }
+    }
+}

@@ -38,4 +38,21 @@
             {{ this.updateService.currentCustomer.zipCode }} {{ this.updateService.currentCustomer.city }}
         </mat-card-content>
     </mat-card>
+
+    <mat-card class="notes">
+        <button mat-icon-button [matMenuTriggerFor]="notemenu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #notemenu="matMenu" yPosition="below" xPosition="before">
+            <button mat-menu-item (click)="editCustomerAddress()"><mat-icon>note_add</mat-icon>Add Note</button>
+        </mat-menu>
+
+        <mat-card-header>
+            <mat-card-title>Customer Notes</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="notes-content">
+            <app-customer-detail-notes></app-customer-detail-notes>
+        </mat-card-content>
+    </mat-card>
 </section>

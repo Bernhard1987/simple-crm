@@ -51,3 +51,19 @@ section {
         transform: translateY(-50%);
     }
 }
+
+.notes {
+    button {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+    }
+
+    >.notes-content {
+        min-height: 30vh;
+        max-height: 50vh;
+        overflow-y: auto;
+        resize: vertical;
+        background: url('./../../assets/img/resize.svg') no-repeat right bottom;
+    }
+}
