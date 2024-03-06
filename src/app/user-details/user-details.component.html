@@ -4,7 +4,10 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #addressmenu="matMenu" yPosition="below" xPosition="before">
-            <button mat-menu-item (click)="editUserDetail()">Edit</button>
+            <button mat-menu-item (click)="editUserDetail()"><mat-icon>description</mat-icon>Edit User Data</button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="editUserDetail()"><mat-icon>key</mat-icon>Change Password</button>
+            <button mat-menu-item (click)="editUserDetail()"><mat-icon>change_circle</mat-icon>Change E-Mail</button>
         </mat-menu>
 
         <mat-card-header>

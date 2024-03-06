@@ -4,18 +4,21 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { UpdateService } from '../firebase-services/update.service';
+import { UserData } from '../models/userdata.class';
 
 @Component({
   selector: 'app-user-details',
   standalone: true,
   imports: [
-     MatCardModule,
-     MatIconModule,
-     MatButtonModule,
-     MatMenuModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatDividerModule,
   ],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.scss'
@@ -27,11 +30,12 @@ export class UserDetailsComponent {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-        this.updateService.getCurrentUserData();
+    this.updateService.getCurrentUserData();
   }
 
   editUserDetail() {
-      const dialog = this.dialog.open(DialogEditUserDataComponent);
-      this.updateService.dialogOpen = true;
+    const dialog = this.dialog.open(DialogEditUserDataComponent);
+    this.updateService.dialogOpen = true;
+    dialog.componentInstance.userData = new UserData(this.updateService.currentUserData);
   }
 }

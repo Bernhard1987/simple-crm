@@ -35,7 +35,7 @@ export class UpdateService {
   constructor() {
     this.unsubCustomerList = this.subCustomerList();
     // console.log('localuser constructor: ', this.localUser);
-    console.log('auth constructor: ', this.auth);
+    // console.log('auth constructor: ', this.auth);
   }
 
   ngOnDestroy() {
@@ -118,6 +118,13 @@ export class UpdateService {
     }
   }
 
+  getCleanUserDataJson(userData: UserData): {} {
+    return {
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+    }
+  }
+
   async saveCustomer(customer: {}) {
     this.loading = !this.loading;
     await addDoc(this.getCustomersRef(), customer).catch(
@@ -171,6 +178,19 @@ export class UpdateService {
       }
     )
   }
+
+  async updateUserData(userData: UserData) {
+    if (this.currentUserUid) {
+      await updateDoc(doc(this.firestore, 'userdata', this.currentUserUid), this.getCleanUserDataJson(userData)).catch(
+        (err) => { console.error(err) }
+      ).then(
+        (docRef) => {
+          console.log('userData updated successful');
+        }
+      )
+    }
+  }
+
 
   loginUser(user: NewUser) {
     signInWithEmailAndPassword(this.auth, user.email, user.password)

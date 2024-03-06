@@ -1,1 +1,22 @@
-<p>dialog-edit-user-data works!</p>
+@if(updateService.loading) {
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+<h2 mat-dialog-title>Edit User Data</h2>
+<mat-dialog-content class="mat-dialog-content gap-8">
+    <div class="mat-dialog-row">
+        <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input [(ngModel)]="userData.firstName" matInput placeholder="John">
+            <!-- <mat-hint>Please enter a name</mat-hint> -->
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input [(ngModel)]="userData.lastName" matInput placeholder="Doe">
+            <!-- <mat-hint>Please enter a name</mat-hint> -->
+        </mat-form-field>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>
