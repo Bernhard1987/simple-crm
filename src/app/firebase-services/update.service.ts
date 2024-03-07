@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Customer } from '../models/customer.class';
 import { NewUser } from '../models/new-user.class';
 import { UserData } from '../models/userdata.class';
+import { Note } from '../models/note.class';
 import { GoogleAuthProvider, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Router, RouterLink } from '@angular/router';
 
@@ -26,7 +27,7 @@ export class UpdateService {
 
   customerList: Customer[] = [];
   currentCustomer: Customer = new Customer();
-  currentCustomerNotesCollection = [];
+  currentCustomerNotesCollection: Note[] = [];
 
   userString = localStorage.getItem('user');
   localUser: any = this.userString ? JSON.parse(this.userString) : '';
@@ -70,14 +71,14 @@ export class UpdateService {
     }
   }
 
-  // setNoteObject(obj: any) {
-  //   return {
-  //     title: title || "",
-  //     content: content || "",
-  //     createdByUid: createdByUid || "",
-  //     creationTime: creationTime || 0
-  //   }
-  // }
+  setNoteObject(obj: any) {
+    return {
+      title: obj.title || "",
+      content: obj.content || "",
+      createdByUid: obj.createdByUid || "",
+      creationTime: obj.creationTime || 0
+    }
+  }
 
   setUserDataObject() {
     return {
@@ -94,13 +95,13 @@ export class UpdateService {
   }
 
   getCurrentCustomerNotes(currentCustomerId: string) {
-    let ref = collection(this.firestore, "customers/" + currentCustomerId + "/notices");
+    let ref = collection(this.firestore, `customers/${currentCustomerId}/notices`);
     return onSnapshot(ref, (noteList) => {
-      console.log(noteList);
       this.currentCustomerNotesCollection = [];
-      // noteList.forEach(note: any => {
-      //         this.currentCustomerNotesCollection.push(note.data());
-      // })
+      noteList.forEach(note => {
+        this.currentCustomerNotesCollection.push(this.setNoteObject(note.data()));
+      })
+      console.log(this.currentCustomerNotesCollection);
     })
   }
 
