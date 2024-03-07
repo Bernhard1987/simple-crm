@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { UpdateService } from '../firebase-services/update.service';
+import { UpdateService } from '../services/firebase/update.service';
 import { CustomerDetailNotesComponent } from '../customer-detail-notes/customer-detail-notes.component';
 import { DialogEditCustomerComponent } from '../dialog-edit-customer/dialog-edit-customer.component';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';

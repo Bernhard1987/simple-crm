@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink } from '@angular/router';
-import { UpdateService } from './firebase-services/update.service';
+import { UpdateService } from './services/firebase/update.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerBaseComponent } from './customer-base/customer-base.component';
 import { NavSettingsComponent } from './nav-settings/nav-settings.component';

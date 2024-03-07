@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UpdateService } from '../firebase-services/update.service';
+import { UpdateService } from '../services/firebase/update.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -13,7 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Customer } from '../models/customer.class';
-import { UpdateService } from '../firebase-services/update.service';
+import { UpdateService } from '../services/firebase/update.service';
 
 @Component({
   selector: 'app-dialog-edit-address',

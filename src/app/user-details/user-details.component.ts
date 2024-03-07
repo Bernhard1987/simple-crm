@@ -7,7 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { UpdateService } from '../firebase-services/update.service';
+import { UpdateService } from '../services/firebase/update.service';
 import { UserData } from '../models/userdata.class';
 
 @Component({

@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { Firestore, onSnapshot, collection, addDoc, setDoc, updateDoc, deleteDoc, doc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Customer } from '../models/customer.class';
-import { NewUser } from '../models/new-user.class';
-import { UserData } from '../models/userdata.class';
-import { Note } from '../models/note.class';
+import { Customer } from '../../models/customer.class';
+import { NewUser } from '../../models/new-user.class';
+import { UserData } from '../../models/userdata.class';
+import { Note } from '../../models/note.class';
 import { GoogleAuthProvider, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { Router, RouterLink } from '@angular/router';
 
@@ -95,7 +95,7 @@ export class UpdateService {
   }
 
   getCurrentCustomerNotes(currentCustomerId: string) {
-    let ref = collection(this.firestore, `customers/${currentCustomerId}/notices`);
+    let ref = this.getCustomerNotesRef(currentCustomerId);
     return onSnapshot(ref, (noteList) => {
       this.currentCustomerNotesCollection = [];
       noteList.forEach(note => {
@@ -118,6 +118,10 @@ export class UpdateService {
 
   getCustomersRef() {
     return collection(this.firestore, 'customers');
+  }
+
+  getCustomerNotesRef(currentCustomerId: string) {
+    return collection(this.firestore, `customers/${currentCustomerId}/notes`);
   }
 
   getUserDataRef() {
@@ -191,7 +195,6 @@ export class UpdateService {
 
   async createUserData(userCredential: any) {
     const retUser = userCredential.user;
-    console.log('Hello, its me, createUserData trying to create new UserData for ', retUser.uid);
     await setDoc(doc(this.firestore, 'userdata', retUser.uid), this.setUserDataObject()).catch(
       (err) => { console.error(err) }
     ).then(

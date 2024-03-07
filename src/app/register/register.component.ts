@@ -8,7 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Customer } from '../models/customer.class';
 import { NewUser } from '../models/new-user.class';
-import { UpdateService } from '../firebase-services/update.service';
+import { UpdateService } from '../services/firebase/update.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
