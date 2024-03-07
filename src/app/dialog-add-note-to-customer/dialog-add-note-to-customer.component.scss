@@ -1,0 +1,11 @@
+.mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 8px !important;
+
+    >.mat-dialog-row {
+        display: flex;
+        gap: 16px;
+        min-width: 50vw;
+    }
+}

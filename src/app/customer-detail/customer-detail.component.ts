@@ -10,16 +10,18 @@ import { CustomerDetailNotesComponent } from '../customer-detail-notes/customer-
 import { DialogEditCustomerComponent } from '../dialog-edit-customer/dialog-edit-customer.component';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 import { Customer } from '../models/customer.class';
+import { DialogAddNoteToCustomerComponent } from '../dialog-add-note-to-customer/dialog-add-note-to-customer.component';
 
 @Component({
   selector: 'app-customer-detail',
   standalone: true,
   imports: [
-    MatCardModule, 
-    MatIconModule, 
-    MatButtonModule, 
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
     MatMenuModule,
     CustomerDetailNotesComponent,
+    DialogAddNoteToCustomerComponent
   ],
   templateUrl: './customer-detail.component.html',
   styleUrl: './customer-detail.component.scss'
@@ -38,9 +40,19 @@ export class CustomerDetailComponent {
       this.customerId = paramMap.get('id');
       if (this.customerId) {
         this.updateService.getSingleCustomerData(this.customerId);
-        this.updateService.getCurrentCustomerNotes(this.customerId);
       }
     })
+  }
+
+  addNoteToCustomer() {
+    const dialog = this.dialog.open(DialogAddNoteToCustomerComponent);
+    this.updateService.dialogOpen = true;
+    if (this.updateService.currentUserUid) {
+      dialog.componentInstance.currentUserUid = this.updateService.currentUserUid;
+    }
+    if (this.customerId) {
+      dialog.componentInstance.currentCustomerUid = this.customerId;
+    }
   }
 
   editCustomerDetail() {

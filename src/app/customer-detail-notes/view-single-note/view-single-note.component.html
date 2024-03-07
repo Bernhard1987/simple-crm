@@ -1,13 +1,12 @@
 <mat-card class="single-note">
     <mat-card-content class="note-header">
             <mat-icon class="note-header-icon">schedule</mat-icon>
-            <span>06.03.2023 13:09</span>
+            <span>{{ formatCurrentDate() }}</span>
             <mat-icon class="note-header-icon">person</mat-icon> 
-            <span>Bernhard Reindl</span>
+            <span>{{ resolveUidName() }}</span>
     </mat-card-content>
     <mat-card-content class="note-message">
-        <mat-card-title> This is the Title</mat-card-title>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut amet hic voluptatem, rem sed ullam aspernatur eum
-        vero quod velit accusantium, perspiciatis impedit est et maxime blanditiis illum? Ipsam, neque?
+        <mat-card-title>{{ title }}</mat-card-title>
+        {{ content }}
     </mat-card-content>
 </mat-card>

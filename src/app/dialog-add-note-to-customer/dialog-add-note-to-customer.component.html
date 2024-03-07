@@ -1,0 +1,27 @@
+@if(updateService.loading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+    <h2 mat-dialog-title>Add Note</h2>
+    <mat-dialog-content class="mat-dialog-content gap-8">
+    
+    <div class="mat-dialog-row">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Title</mat-label>
+            <input [(ngModel)]="note.title" matInput placeholder="Add your title here...">
+            <!-- <mat-hint>Please enter a name</mat-hint> -->
+        </mat-form-field>
+    </div>
+    
+    <div class="mat-dialog-row">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Content</mat-label>
+            <textarea [(ngModel)]="note.content" matInput placeholder="Type something..."></textarea>
+            <!-- <mat-hint>Please enter a name</mat-hint> -->
+        </mat-form-field>
+    </div>
+    
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+    </mat-dialog-actions>

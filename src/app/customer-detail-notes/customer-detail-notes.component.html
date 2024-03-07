@@ -1,5 +1,6 @@
 <section>
-    <app-view-single-note></app-view-single-note>
-    <app-view-single-note></app-view-single-note>
-    <app-view-single-note></app-view-single-note>
+    @for (note of updateService.currentCustomerNotesCollection; track $index) {
+    <app-view-single-note [title]="note.title" [content]="note.content" [creationTime]="note.creationTime"
+        [createdByUid]="note.createdByUid"></app-view-single-note>
+    }
 </section>

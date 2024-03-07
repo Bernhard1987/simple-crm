@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, onSnapshot, collection, addDoc, setDoc, updateDoc, deleteDoc, doc } from '@angular/fire/firestore';
+import { Firestore, onSnapshot, collection, addDoc, setDoc, updateDoc, Timestamp, serverTimestamp, deleteDoc, doc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Customer } from '../../models/customer.class';
 import { NewUser } from '../../models/new-user.class';
@@ -154,6 +154,18 @@ export class UpdateService {
   async saveCustomer(customer: {}) {
     this.loading = !this.loading;
     await addDoc(this.getCustomersRef(), customer).catch(
+      (err) => { console.error(err) }
+    ).then(
+      (docRef) => {
+        this.loading = !this.loading;
+        this.dialogOpen = false;
+      }
+    )
+  }
+
+  async saveNoteToCustomer(customerUid:string, note: {}) {
+    this.loading = !this.loading;
+    await addDoc(this.getCustomerNotesRef(customerUid), note).catch(
       (err) => { console.error(err) }
     ).then(
       (docRef) => {

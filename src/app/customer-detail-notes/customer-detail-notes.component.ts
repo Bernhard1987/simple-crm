@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UpdateService } from '../services/firebase/update.service';
 import { ViewSingleNoteComponent } from './view-single-note/view-single-note.component';
 
@@ -10,12 +10,12 @@ import { ViewSingleNoteComponent } from './view-single-note/view-single-note.com
   styleUrl: './customer-detail-notes.component.scss'
 })
 export class CustomerDetailNotesComponent {
-  notesCollection = [];
-
+  @Input() customerId: string | null = '';
   updateService = new UpdateService();
 
-  getCustomerNotes() {
-    
+  ngOnInit(): void {
+    if (this.customerId) {
+      this.updateService.getCurrentCustomerNotes(this.customerId);
+    }
   }
-
 }
