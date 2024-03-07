@@ -58,6 +58,7 @@ export class DialogAddNoteToCustomerComponent {
 
   save() {
     this.note.creationTime = Date.now();
+    this.note.createdByUid = this.currentUserUid;
     this.updateService.saveNoteToCustomer(this.currentCustomerUid, this.getCleanNoteJson(this.note));
     if (!this.updateService.dialogOpen) {
       this.dialogRef.close();

@@ -1,5 +1,19 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, onSnapshot, collection, addDoc, setDoc, updateDoc, Timestamp, serverTimestamp, deleteDoc, doc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  onSnapshot,
+  collection,
+  addDoc,
+  setDoc,
+  updateDoc,
+  Timestamp,
+  serverTimestamp,
+  deleteDoc,
+  doc,
+  query,
+  orderBy,
+  limit
+} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Customer } from '../../models/customer.class';
 import { NewUser } from '../../models/new-user.class';
@@ -96,7 +110,8 @@ export class UpdateService {
 
   getCurrentCustomerNotes(currentCustomerId: string) {
     let ref = this.getCustomerNotesRef(currentCustomerId);
-    return onSnapshot(ref, (noteList) => {
+    let q = query(ref, orderBy("creationTime", "desc"), limit(100));
+    return onSnapshot(q, (noteList) => {
       this.currentCustomerNotesCollection = [];
       noteList.forEach(note => {
         this.currentCustomerNotesCollection.push(this.setNoteObject(note.data()));
@@ -163,7 +178,7 @@ export class UpdateService {
     )
   }
 
-  async saveNoteToCustomer(customerUid:string, note: {}) {
+  async saveNoteToCustomer(customerUid: string, note: {}) {
     this.loading = !this.loading;
     await addDoc(this.getCustomerNotesRef(customerUid), note).catch(
       (err) => { console.error(err) }
