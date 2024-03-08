@@ -131,6 +131,17 @@ export class UpdateService {
     }
   }
 
+  getSpecificUserData(specificUserUid: string) {
+    if (specificUserUid) {
+      return onSnapshot(this.getSingleDocRef('userdata', specificUserUid), (userData: any) => {
+        this.currentUserData = userData.data();
+      })
+    } else {
+      console.error('error getting name from User');
+      return this.setUserDataObject(); //returns empty Data object
+    }
+  }
+
   getCustomersRef() {
     return collection(this.firestore, 'customers');
   }

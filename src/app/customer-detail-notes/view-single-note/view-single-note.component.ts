@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { FormatDateService } from '../../services/format-date/format-date.service';
+import { UpdateService } from '../../services/firebase/update.service';
 
 @Component({
   selector: 'app-view-single-note',
@@ -20,12 +21,19 @@ export class ViewSingleNoteComponent {
   @Input() createdByUid: string = '';
 
   formatDate = new FormatDateService();
+  updateService = new UpdateService();
 
   formatCurrentDate() {
     return this.formatDate.formatDateDDMMYYYYHHMM(this.creationTime);
   }
 
   resolveUidName() {
-    return this.createdByUid;
+    this.updateService.getSpecificUserData(this.createdByUid);
+    if(this.updateService.currentUserData.firstName || 
+      (this.updateService.currentUserData.lastName)) {
+        return `${this.updateService.currentUserData.firstName} ${this.updateService.currentUserData.lastName}`
+      } else {
+        return "E-Mail Address Resolve Of Firebase Auth";
+      }
   }
 }
