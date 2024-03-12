@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,7 +20,7 @@ import { UpdateService } from '../services/firebase/update.service';
   styleUrl: './nav-settings.component.scss'
 })
 export class NavSettingsComponent {
-  updateService = new UpdateService;
+  updateService = inject(UpdateService);
 
   logoutUser() {
     this.updateService.logoutUser();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -29,7 +29,7 @@ import { RouterLink } from '@angular/router';
 })
 export class RegisterComponent {
 
-  updateService = new UpdateService();
+  updateService = inject(UpdateService);
 
   user = {
     email: '',

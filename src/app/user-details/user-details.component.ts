@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DialogEditUserDataComponent } from '../dialog-edit-user-data/dialog-edit-user-data.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,12 +25,20 @@ import { UserData } from '../models/userdata.class';
 })
 export class UserDetailsComponent {
 
-  updateService = new UpdateService();
+  updateService = inject(UpdateService);
 
-  constructor(public dialog: MatDialog) { }
+  unsubUserData;
+
+  constructor(public dialog: MatDialog) { 
+    this.unsubUserData = this.updateService.getCurrentUserData();
+  }
 
   ngOnInit(): void {
     this.updateService.getCurrentUserData();
+  }
+
+  ngOnDestroy() {
+    this.unsubUserData();
   }
 
   editUserDetail() {

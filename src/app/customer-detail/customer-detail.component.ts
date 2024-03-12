@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,18 +29,23 @@ import { DialogAddNoteToCustomerComponent } from '../dialog-add-note-to-customer
 export class CustomerDetailComponent {
   unsubSingle: any;
 
-  customerId: string | null = '';
+  updateService = inject(UpdateService);
 
-  updateService = new UpdateService;
-
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
+    console.log('hello');
     this.route.paramMap.subscribe(paramMap => {
-      this.customerId = paramMap.get('id');
-      if (this.customerId) {
-        this.updateService.getSingleCustomerData(this.customerId);
+      const customerId = paramMap.get('id');
+      console.log("Before calling", customerId);
+      if (customerId === null) {
+        console.error('Customer ID is null');
+        return;
       }
+      this.updateService.customerId = customerId;
+      console.log("Before calling getSingleCustomerData", this.updateService.customerId);
+      this.updateService.getSingleCustomerData(this.updateService.customerId);
     })
   }
 
@@ -50,8 +55,8 @@ export class CustomerDetailComponent {
     if (this.updateService.currentUserUid) {
       dialog.componentInstance.currentUserUid = this.updateService.currentUserUid;
     }
-    if (this.customerId) {
-      dialog.componentInstance.currentCustomerUid = this.customerId;
+    if (this.updateService.customerId) {
+      dialog.componentInstance.currentCustomerUid = this.updateService.customerId;
     }
   }
 
@@ -59,13 +64,13 @@ export class CustomerDetailComponent {
     const dialog = this.dialog.open(DialogEditCustomerComponent);
     this.updateService.dialogOpen = true;
     dialog.componentInstance.customer = new Customer(this.updateService.currentCustomer);
-    dialog.componentInstance.customerId = this.customerId;
+    dialog.componentInstance.customerId = this.updateService.customerId;
   }
 
   editCustomerAddress() {
     const dialog = this.dialog.open(DialogEditAddressComponent);
     this.updateService.dialogOpen = true;
     dialog.componentInstance.customer = new Customer(this.updateService.currentCustomer);
-    dialog.componentInstance.customerId = this.customerId;
+    dialog.componentInstance.customerId = this.updateService.customerId;
   }
 }

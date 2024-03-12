@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UpdateService } from '../services/firebase/update.service';
 
 @Component({
@@ -9,10 +9,5 @@ import { UpdateService } from '../services/firebase/update.service';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-  updateService = new UpdateService();
-
-  ngOnInit(): void {
-        this.updateService.getCurrentUserData();
-  }
-
+  updateService = inject(UpdateService);
 }

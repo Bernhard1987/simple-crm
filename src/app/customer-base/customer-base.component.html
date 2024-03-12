@@ -7,12 +7,12 @@
                 <th>Zip Code</th>
                 <th>City</th>
             </tr>
-            @for (user of this.updateService.customerList; track $index) {
-            <tr [routerLink]="['/customers/' + user.id]" routerLinkActive="router-link-active" >
-                <td> {{user.firstName}} {{user.lastName}}</td>
-                <td> {{user.email}} </td>
-                <td> {{user.zipCode}} </td>
-                <td> {{user.city}}</td>
+            @for (customer of this.updateService.customerList; track $index) {
+            <tr [routerLink]="['/customer/' + customer.id]" routerLinkActive="router-link-active" >
+                <td> {{customer.firstName}} {{customer.lastName}}</td>
+                <td> {{customer.email}} </td>
+                <td> {{customer.zipCode}} </td>
+                <td> {{customer.city}}</td>
             </tr>
             }
         </table>
@@ -22,7 +22,7 @@
 
 <div class="btn-container">
     <button (click)="openDialog()" mat-fab color="primary" matTooltip="Add new user"
-        [matTooltipPosition]="position.value!" matTooltipHideDelay="2000">
+        [matTooltipPosition]="'left'" matTooltipHideDelay="2000">
         <mat-icon>person_add</mat-icon>
     </button>
 </div>

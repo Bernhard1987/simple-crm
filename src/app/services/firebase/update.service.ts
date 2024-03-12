@@ -6,8 +6,6 @@ import {
   addDoc,
   setDoc,
   updateDoc,
-  Timestamp,
-  serverTimestamp,
   deleteDoc,
   doc,
   query,
@@ -19,7 +17,14 @@ import { Customer } from '../../models/customer.class';
 import { NewUser } from '../../models/new-user.class';
 import { UserData } from '../../models/userdata.class';
 import { Note } from '../../models/note.class';
-import { GoogleAuthProvider, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "firebase/auth";
 import { Router, RouterLink } from '@angular/router';
 
 @Injectable({
@@ -29,10 +34,10 @@ export class UpdateService {
 
   firestore: Firestore = inject(Firestore);
   provider = new GoogleAuthProvider();
-  auth = getAuth();
-  currentUserUid = this.auth.currentUser?.uid;
+  auth: any;
+  currentUserUid = '';
   currentUserData = new UserData();
-  currentUserEMail = this.auth.currentUser?.email;
+  currentUserEMail = '';
   router = new Router();
 
   loading = false;
@@ -41,22 +46,11 @@ export class UpdateService {
 
   customerList: Customer[] = [];
   currentCustomer: Customer = new Customer();
+  customerId: string = '';
   currentCustomerNotesCollection: Note[] = [];
 
   userString = localStorage.getItem('user');
   localUser: any = this.userString ? JSON.parse(this.userString) : '';
-
-  unsubCustomerList;
-
-  constructor() {
-    this.unsubCustomerList = this.subCustomerList();
-    // console.log('localuser constructor: ', this.localUser);
-    // console.log('auth constructor: ', this.auth);
-  }
-
-  ngOnDestroy() {
-    this.unsubCustomerList();
-  }
 
   /**
    * All Customer related functions are set here
@@ -102,6 +96,7 @@ export class UpdateService {
   }
 
   getSingleCustomerData(customerId: string) {
+    console.log('getting info for ', customerId);
     return onSnapshot(this.getSingleDocRef('customers', customerId), (customer: any) => {
       this.currentCustomer = customer.data();
       this.currentCustomer.id = customerId;
@@ -109,6 +104,7 @@ export class UpdateService {
   }
 
   getCurrentCustomerNotes(currentCustomerId: string) {
+    console.log("getCurrentCustomerNotes ", currentCustomerId);
     let ref = this.getCustomerNotesRef(currentCustomerId);
     let q = query(ref, orderBy("creationTime", "desc"), limit(100));
     return onSnapshot(q, (noteList) => {
@@ -121,14 +117,15 @@ export class UpdateService {
   }
 
   getCurrentUserData() {
-    if (this.currentUserUid) {
-      return onSnapshot(this.getSingleDocRef('userdata', this.currentUserUid), (userData: any) => {
-        this.currentUserData = userData.data();
-      })
-    } else {
+    if (!this.currentUserUid) {
       console.error('error getting currentUserData');
-      return this.setUserDataObject();
+      return () => {
+        this.currentUserData = this.setUserDataObject();
+      };
     }
+    return onSnapshot(this.getSingleDocRef('userdata', this.currentUserUid), (userData: any) => {
+      this.currentUserData = userData.data();
+    })
   }
 
   getSpecificUserData(specificUserUid: string) {
@@ -214,6 +211,22 @@ export class UpdateService {
   /**
    * Firebase Auth related functions
    */
+
+  async initUser() {
+    this.auth = getAuth();
+
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.currentUserUid = user.uid;
+        if (user.email) {
+          this.currentUserEMail = user.email;
+        }
+        this.getCurrentUserData();
+      } else {
+        this.router.navigate(['login']);
+      }
+    });
+  }
 
   createNewUser(user: NewUser) {
     createUserWithEmailAndPassword(this.auth, user.email, user.password)

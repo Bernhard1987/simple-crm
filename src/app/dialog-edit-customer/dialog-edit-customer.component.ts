@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialogRef,
   MatDialogTitle,
@@ -36,7 +36,7 @@ import { UpdateService } from '../services/firebase/update.service';
   styleUrl: './dialog-edit-customer.component.scss'
 })
 export class DialogEditCustomerComponent {
-  updateService = new UpdateService();
+  updateService = inject(UpdateService);
   customer = new Customer();
   customerId: string | null = '';
 

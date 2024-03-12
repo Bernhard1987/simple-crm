@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { UpdateService } from './services/firebase/update.service';
@@ -36,5 +36,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 export class AppComponent {
   title = 'simple-crm';
 
-  updateService = new UpdateService;
+  updateService = inject(UpdateService);
+
+  ngOnInit(): void {
+    this.updateService.initUser();
+  }
+
 }

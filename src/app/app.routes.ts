@@ -8,8 +8,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 export const routes: Routes = [
     { path: '', component: DashboardComponent },
     { path: 'dashboard', component: DashboardComponent },
-    { path: 'customers', component: CustomerBaseComponent },
-    { path: 'customers/:id', component: CustomerDetailComponent },
+    { path: 'customerbase', component: CustomerBaseComponent },
+    { path: 'customer', redirectTo:'/customerbase',  pathMatch: 'full' },
+    { path: 'customer/:id', component: CustomerDetailComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'user', component: UserDetailsComponent },
 ];

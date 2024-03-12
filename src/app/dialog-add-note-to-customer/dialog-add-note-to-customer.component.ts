@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialogRef,
   MatDialogTitle,
@@ -36,7 +36,7 @@ import { Note } from '../models/note.class';
 export class DialogAddNoteToCustomerComponent {
   currentUserUid = '';
   currentCustomerUid = '';
-  updateService = new UpdateService();
+  updateService = inject(UpdateService);
   note: Note = new Note();
 
   constructor(

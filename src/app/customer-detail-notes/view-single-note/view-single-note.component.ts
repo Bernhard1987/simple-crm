@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { FormatDateService } from '../../services/format-date/format-date.service';
@@ -21,7 +21,7 @@ export class ViewSingleNoteComponent {
   @Input() createdByUid: string = '';
 
   formatDate = new FormatDateService();
-  updateService = new UpdateService();
+  updateService = inject(UpdateService);
 
   formatCurrentDate() {
     return this.formatDate.formatDateDDMMYYYYHHMM(this.creationTime);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialogRef,
   MatDialogTitle,
@@ -38,7 +38,7 @@ export class DialogEditUserDataComponent {
     public dialogRef: MatDialogRef<DialogEditUserDataComponent>,
   ) { }
 
-  updateService = new UpdateService();
+  updateService = inject(UpdateService);
   userData = new UserData();
 
   onNoClick(): void {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -25,7 +25,7 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginComponent {
 
-  updateService = new UpdateService;
+  updateService = inject(UpdateService);
 
   user = {
     email: '',
